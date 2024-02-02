@@ -1,0 +1,26 @@
+{
+  "name": "file-manager",
+  "version": "1.0.0",
+  "description": "This is the repo for training task in RSS",
+  "main": "index.js",
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Alyona8891/file-manager.git"
+  },
+  "keywords": [
+    "nodejs"
+  ],
+  "author": "Alyona8891",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Alyona8891/file-manager/issues"
+  },
+  "homepage": "https://github.com/Alyona8891/file-manager#readme"
+}
