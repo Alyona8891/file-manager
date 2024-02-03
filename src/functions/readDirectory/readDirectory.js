@@ -3,11 +3,12 @@ const fsPromises = fs.promises;
 
 import { userHomeDir } from '../../../index.js';
 import { showHomeDirectory } from '../writeData/showHomeDirectory.js';
+import { ERROR_MESSAGE } from '../../constants.js';
 
 export const readDirectory = (filePath) => {
   fs.access(filePath, fs.constants.F_OK, (err) => {
     if (err) {
-      throw new Error('FS operation failed');
+      console.error(ERROR_MESSAGE);
     } else {
       fsPromises
         .readdir(filePath, { withFileTypes: true })
