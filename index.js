@@ -7,5 +7,6 @@ import { showGreeting } from './src/functions/showMessage/showGreeting.js';
 import { writeData } from './src/functions/writeData/writeData.js';
 
 showGreeting();
+showHomeDirectory();
 
 await writeData();
