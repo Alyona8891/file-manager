@@ -1,16 +1,11 @@
 import fs from 'node:fs';
-import { stdin } from 'node:process';
+
 import path, { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-import { showGreeting } from './src/functions/showGreeting/showGreeting.js';
+import { showGreeting } from './src/functions/showMessage/showGreeting.js';
+import { writeData } from './src/functions/writeData/writeData.js';
 
 showGreeting();
 
-const write = async () => {
-  stdin.on('data', (data) => {
-    console.log(data);
-  });
-};
-
-await write();
+await writeData();
