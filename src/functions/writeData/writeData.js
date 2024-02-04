@@ -8,6 +8,7 @@ import { readFile } from '../readFile/readFile.js';
 import { createFile } from '../createFile/createFile.js';
 import { renameFile } from '../renameFile/renameFile.js';
 import { copyFile } from '../copyFile/copyFile.js';
+import { deleteFile } from '../deleteFile/deleteFile.js';
 
 const FINISH_KEY = '.exit';
 const MOVING_UP_KEY = 'up';
@@ -17,6 +18,7 @@ const READ_FILE_KEY = 'cat ';
 const ADD_FILE_KEY = 'add ';
 const RENAME_FILE_KEY = 'rn ';
 const COPY_FILE_KEY = 'cp ';
+const DELETE_FILE_KEY = 'rm ';
 
 export const writeData = async () => {
   stdin.on('data', async (data) => {
@@ -40,6 +42,10 @@ export const writeData = async () => {
       await renameFile(invalidData.slice(RENAME_FILE_KEY.length));
     } else if (invalidData.slice(0, COPY_FILE_KEY.length) === COPY_FILE_KEY) {
       await copyFile(invalidData.slice(COPY_FILE_KEY.length));
+    } else if (
+      invalidData.slice(0, DELETE_FILE_KEY.length) === DELETE_FILE_KEY
+    ) {
+      await deleteFile(invalidData.slice(DELETE_FILE_KEY.length));
     } else {
       console.log('Invalid input');
     }
