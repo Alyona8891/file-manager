@@ -5,7 +5,7 @@ import { changeDir } from '../changeDirectory/changeDir.js';
 import { getArgs } from '../getArgs/getArgs.js';
 import { userHomeDir } from '../../../index.js';
 
-export const copyFile = async (data) => {
+export const copyFile = (data) => {
   try {
     const argsArr = getArgs(data);
     const oldPathToFile = argsArr[0];
