@@ -28,7 +28,6 @@ export const writeData = async () => {
       changeDir(invalidData.slice(CD_KEY.length));
     } else if (invalidData.slice(0, READ_FILE_KEY.length) === READ_FILE_KEY) {
       await readFile(invalidData.slice(READ_FILE_KEY.length));
-      changeDir(invalidData.slice(READ_FILE_KEY.length));
     } else {
       console.log('Invalid input');
     }

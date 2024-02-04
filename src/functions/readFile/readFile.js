@@ -1,19 +1,14 @@
 import fs from 'node:fs';
-import { ERROR_MESSAGE } from '../../constants';
-
-const fsPromises = fs.promises;
+import os from 'node:os';
+import { stdout } from 'node:process';
+import { ERROR_MESSAGE } from '../../constants.js';
+import { changeDir } from '../changeDirectory/changeDir.js';
 
 export const readFile = async (pathToFile) => {
-  fs.access(pathToFile, fs.constants.F_OK, (err) => {
-    if (err) {
-      console.error(ERROR_MESSAGE);
-    } else {
-      fsPromises
-        .readFile(pathToFile, 'utf-8')
-        .then((data) => console.log(data))
-        .catch(() => {
-          console.error(ERROR_MESSAGE);
-        });
-    }
+  const readStream = fs.createReadStream(pathToFile, 'utf-8');
+  readStream.on('data', (data) => {
+    stdout.write(data + os.EOL);
+    changeDir(pathToFile);
   });
+  readStream.on('error', (err) => console.error(ERROR_MESSAGE));
 };
