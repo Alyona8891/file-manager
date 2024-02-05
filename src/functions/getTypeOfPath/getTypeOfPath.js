@@ -1,6 +1,6 @@
 import fs from 'node:fs';
 const fsPromises = fs.promises;
-import { ERROR_MESSAGE, INVALID_INPUT_MESSAGE } from '../../constants.js';
+import { ERROR_MESSAGE, INVALID_INPUT_MESSAGE, TYPE_OF_PATH } from '../../constants.js';
 
 export const getTypeOfPath = async (path) => {
   const stats = await fsPromises.stat(path, (err) => {
@@ -10,9 +10,9 @@ export const getTypeOfPath = async (path) => {
   });
   try {
     if (stats.isFile()) {
-      return 'file';
+      return TYPE_OF_PATH.file;
     } else if (stats.isDirectory()) {
-      return 'directory';
+      return TYPE_OF_PATH.directory;
     }
   } catch (error) {
     console.error(ERROR_MESSAGE);

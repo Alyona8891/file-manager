@@ -9,6 +9,7 @@ export const readDirectory = (filePath) => {
   fs.access(filePath, fs.constants.F_OK, (err) => {
     if (err) {
       console.error(ERROR_MESSAGE);
+      showWorkingDir(userWorkingDir.path);
     } else {
       fsPromises
         .readdir(filePath, { withFileTypes: true })
@@ -18,14 +19,19 @@ export const readDirectory = (filePath) => {
               ? { Name: dirent.name, Type: 'File' }
               : { Name: dirent.name, Type: 'Directory' };
           });
-          const sortedArr = resultArr.sort((a, b) => {
-            return a.Name === b.Name ? 0 : a.Name < b.Name ? -1 : 1;
-          });
+          const directorysArr = resultArr
+            .filter((item) => item.Type === 'Directory')
+            .sort();
+          const filesArr = resultArr
+            .filter((item) => item.Type === 'File')
+            .sort();
+          const sortedArr = directorysArr.concat(filesArr);
           console.table(sortedArr);
           showWorkingDir(userWorkingDir.path);
         })
-        .catch((err) => {
-          console.error(err);
+        .catch(() => {
+          console.error(ERROR_MESSAGE);
+          showWorkingDir(userWorkingDir.path);
         });
     }
   });
