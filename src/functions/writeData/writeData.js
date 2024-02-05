@@ -61,7 +61,7 @@ export const writeData = async () => {
     ) {
       await renameFile(invalidData.slice(RENAME_FILE_KEY.length));
     } else if (invalidData.slice(0, COPY_FILE_KEY.length) === COPY_FILE_KEY) {
-      copyFile(invalidData.slice(COPY_FILE_KEY.length));
+      await copyFile(invalidData.slice(COPY_FILE_KEY.length));
     } else if (
       invalidData.slice(0, DELETE_FILE_KEY.length) === DELETE_FILE_KEY
     ) {
