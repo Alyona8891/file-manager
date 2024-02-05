@@ -22,8 +22,8 @@ export const changeDir = async (pathToDirectory) => {
         showWorkingDir(userWorkingDir.path);
       }
     });
-  } else {
-    console.error(INVALID_INPUT_MESSAGE);
-    showWorkingDir(userWorkingDir.path);
+  } else if (typeOfPath === TYPE_OF_PATH.file) {
+    const parentDir = path.dirname(directory);
+    showWorkingDir(parentDir);
   }
 };
