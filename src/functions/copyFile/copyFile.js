@@ -3,7 +3,7 @@ import path from 'node:path';
 import { ERROR_MESSAGE } from '../../constants.js';
 import { changeDir } from '../changeDirectory/changeDir.js';
 import { getArgs } from '../getArgs/getArgs.js';
-import { userHomeDir } from '../../../index.js';
+import { userWorkingDir } from '../../../index.js';
 
 export const copyFile = (data) => {
   try {
@@ -21,6 +21,6 @@ export const copyFile = (data) => {
     changeDir(newDir);
   } catch (error) {
     console.error(error);
-    changeDir(userHomeDir.path);
+    changeDir(userWorkingDir.path);
   }
 };

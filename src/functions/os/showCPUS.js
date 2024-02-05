@@ -1,7 +1,7 @@
 import os from 'node:os';
 import { ERROR_MESSAGE } from '../../constants.js';
 import { changeDir } from '../changeDirectory/changeDir.js';
-import { userHomeDir } from '../../../index.js';
+import { userWorkingDir } from '../../../index.js';
 
 const CPUS_AMOUNT_TEMPLATE = 'Amount of CPUS: ';
 const CPUS_INFO_TEMPLATE = 'INFO: ';
@@ -15,7 +15,7 @@ export const showCPUs = () => {
     console.log(CPUS_AMOUNT_TEMPLATE + invalidCpusInfo.length);
     console.log(CPUS_INFO_TEMPLATE);
     console.log(invalidCpusInfo);
-    changeDir(userHomeDir.path);
+    changeDir(userWorkingDir.path);
   } catch (error) {
     console.error(ERROR_MESSAGE);
   }

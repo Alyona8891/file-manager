@@ -2,11 +2,11 @@ import { homedir } from 'os';
 
 import { showGreeting } from './src/functions/showMessage/showGreeting.js';
 import { writeData } from './src/functions/writeData/writeData.js';
-import { showHomeDirectory } from './src/functions/writeData/showHomeDirectory.js';
+import { showWorkingDir } from './src/functions/writeData/showWorkingDir.js';
 
-export let userHomeDir = { path: homedir() };
+export const userWorkingDir = { path: homedir() };
 
 showGreeting();
-showHomeDirectory(userHomeDir.path);
+showWorkingDir(userWorkingDir.path);
 
 await writeData();

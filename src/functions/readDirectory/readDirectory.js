@@ -1,8 +1,8 @@
 import fs from 'node:fs';
 const fsPromises = fs.promises;
 
-import { userHomeDir } from '../../../index.js';
-import { showHomeDirectory } from '../writeData/showHomeDirectory.js';
+import { userWorkingDir } from '../../../index.js';
+import { showWorkingDir } from '../writeData/showWorkingDir.js';
 import { ERROR_MESSAGE } from '../../constants.js';
 
 export const readDirectory = (filePath) => {
@@ -22,7 +22,7 @@ export const readDirectory = (filePath) => {
             return a.Name === b.Name ? 0 : a.Name < b.Name ? -1 : 1;
           });
           console.table(sortedArr);
-          showHomeDirectory(userHomeDir.path);
+          showWorkingDir(userWorkingDir.path);
         })
         .catch((err) => {
           console.error(err);

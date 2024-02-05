@@ -3,7 +3,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { ERROR_MESSAGE } from '../../constants.js';
 import { changeDir } from '../changeDirectory/changeDir.js';
-import { userHomeDir } from '../../../index.js';
+import { userWorkingDir } from '../../../index.js';
 import { getArgs } from '../getArgs/getArgs.js';
 
 export const decompressFile = async (substring) => {
@@ -17,9 +17,9 @@ export const decompressFile = async (substring) => {
     const writeStream = fs.createWriteStream(destinationPath);
     const brotli = zlib.createBrotliDecompress();
     readStream.pipe(brotli).pipe(writeStream);
-    changeDir(userHomeDir.path);
+    changeDir(userWorkingDir.path);
   } catch (error) {
     console.error(ERROR_MESSAGE);
-    changeDir(userHomeDir.path);
+    changeDir(userWorkingDir.path);
   }
 };

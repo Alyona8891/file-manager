@@ -1,18 +1,29 @@
 import path from 'node:path';
 import fs from 'node:fs';
-import { userHomeDir } from '../../../index.js';
-import { showHomeDirectory } from '../writeData/showHomeDirectory.js';
-import { ERROR_MESSAGE } from '../../constants.js';
+import { userWorkingDir } from '../../../index.js';
+import { showWorkingDir } from '../writeData/showWorkingDir.js';
+import {
+  ERROR_MESSAGE,
+  INVALID_INPUT_MESSAGE,
+  TYPE_OF_PATH,
+} from '../../constants.js';
+import { getTypeOfPath } from '../getTypeOfPath/getTypeOfPath.js';
 
-export const changeDir = (pathToDirectory) => {
-  const parentDirectory = path.resolve(userHomeDir.path, pathToDirectory);
-  fs.access(parentDirectory, fs.constants.F_OK, (err) => {
-    if (err) {
-      console.error(ERROR_MESSAGE);
-      showHomeDirectory(userHomeDir.path);
-    } else {
-      userHomeDir.path = parentDirectory;
-      showHomeDirectory(userHomeDir.path);
-    }
-  });
+export const changeDir = async (pathToDirectory) => {
+  const directory = path.resolve(userWorkingDir.path, pathToDirectory);
+  const typeOfPath = await getTypeOfPath(directory);
+  if (typeOfPath === TYPE_OF_PATH.directory) {
+    fs.access(directory, fs.constants.F_OK, (err) => {
+      if (err) {
+        console.error(ERROR_MESSAGE);
+        showWorkingDir(userWorkingDir.path);
+      } else {
+        userWorkingDir.path = directory;
+        showWorkingDir(userWorkingDir.path);
+      }
+    });
+  } else {
+    console.error(INVALID_INPUT_MESSAGE);
+    showWorkingDir(userWorkingDir.path);
+  }
 };

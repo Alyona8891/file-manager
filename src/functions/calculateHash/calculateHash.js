@@ -1,7 +1,7 @@
 import { createHash } from 'crypto';
 import { createReadStream } from 'node:fs';
 import { ERROR_MESSAGE } from '../../constants.js';
-import { userHomeDir } from '../../../index.js';
+import { userWorkingDir } from '../../../index.js';
 
 export const calculateHash = async (pathToFile) => {
   const readStream = createReadStream(pathToFile);
@@ -9,7 +9,7 @@ export const calculateHash = async (pathToFile) => {
   readStream.on('readable', () => {
     const data = readStream.read();
     data ? hash.update(data) : console.log(hash.digest('hex'));
-    changeDir(userHomeDir.path);
+    changeDir(userWorkingDir.path);
   });
 
   readStream.on('error', () => {

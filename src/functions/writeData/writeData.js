@@ -2,7 +2,7 @@ import { stdin } from 'node:process';
 
 import { showBye } from '../showMessage/showBye.js';
 import { changeDir } from '../changeDirectory/changeDir.js';
-import { userHomeDir } from '../../../index.js';
+import { userWorkingDir } from '../../../index.js';
 import { readDirectory } from '../readDirectory/readDirectory.js';
 import { readFile } from '../readFile/readFile.js';
 import { createFile } from '../createFile/createFile.js';
@@ -19,6 +19,7 @@ import { calculateHash } from '../calculateHash/calculateHash.js';
 import { compressFile } from '../zip/compressFile.js';
 import { decompressFile } from '../zip/decompress.js';
 import { ERROR_MESSAGE, INVALID_INPUT_MESSAGE } from '../../constants.js';
+import { showWorkingDir } from './showWorkingDir.js';
 
 const FINISH_KEY = '.exit';
 const MOVING_UP_KEY = 'up';
@@ -48,7 +49,7 @@ export const writeData = async () => {
     } else if (invalidData === MOVING_UP_KEY) {
       changeDir('..');
     } else if (invalidData === LS_KEY) {
-      readDirectory(userHomeDir.path);
+      readDirectory(userWorkingDir.path);
     } else if (invalidData.slice(0, CD_KEY.length) === CD_KEY) {
       changeDir(invalidData.slice(CD_KEY.length));
     } else if (invalidData.slice(0, READ_FILE_KEY.length) === READ_FILE_KEY) {
@@ -91,11 +92,13 @@ export const writeData = async () => {
       await decompressFile(invalidData.slice(DECOMPRESS_FILE_KEY.length));
     } else {
       console.error(INVALID_INPUT_MESSAGE);
+      showWorkingDir(userWorkingDir.path);
     }
   });
 
   stdin.on('error', () => {
     console.error(ERROR_MESSAGE);
+    showWorkingDir(userWorkingDir.path);
   });
 
   process.on('SIGINT', () => {

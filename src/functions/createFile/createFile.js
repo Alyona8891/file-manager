@@ -3,11 +3,11 @@ import path from 'node:path';
 const fsPromises = fs.promises;
 import { ERROR_MESSAGE } from '../../constants.js';
 import { changeDir } from '../changeDirectory/changeDir.js';
-import { userHomeDir } from '../../../index.js';
+import { userWorkingDir } from '../../../index.js';
 
 export const createFile = async (fileName) => {
-  const pathToFile = path.resolve(userHomeDir.path, fileName);
-  
+  const pathToFile = path.resolve(userWorkingDir.path, fileName);
+
   fs.access(pathToFile, fs.constants.F_OK, (err) => {
     if (err) {
       fsPromises
