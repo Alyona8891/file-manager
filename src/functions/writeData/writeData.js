@@ -15,6 +15,7 @@ import { showCPUs } from '../os/showCPUS.js';
 import { showUsername } from '../os/showUsername.js';
 import { showHomeDir } from '../os/showHomedir.js';
 import { showArchitecture } from '../os/showArchitecture.js';
+import { calculateHash } from '../calculateHash/calculateHash.js';
 
 const FINISH_KEY = '.exit';
 const MOVING_UP_KEY = 'up';
@@ -31,6 +32,7 @@ const GET_CPUS_KEY = 'os --cpus';
 const GET_USERNAME_KEY = 'os --username';
 const GET_HOMEDIR_KEY = 'os --homedir';
 const GET_ARCHITECTURE_KEY = 'os --architecture';
+const CALCULATE_HASH_KEY = 'hash ';
 
 export const writeData = async () => {
   stdin.on('data', async (data) => {
@@ -70,6 +72,10 @@ export const writeData = async () => {
       showHomeDir();
     } else if (invalidData === GET_ARCHITECTURE_KEY) {
       showArchitecture();
+    } else if (
+      invalidData.slice(0, CALCULATE_HASH_KEY.length) === CALCULATE_HASH_KEY
+    ) {
+      calculateHash(invalidData.slice(CALCULATE_HASH_KEY.length));
     } else {
       console.log('Invalid input');
     }
