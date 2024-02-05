@@ -14,6 +14,7 @@ import { showEOL } from '../os/showEOL.js';
 import { showCPUs } from '../os/showCPUS.js';
 import { showUsername } from '../os/showUsername.js';
 import { showHomeDir } from '../os/showHomedir.js';
+import { showArchitecture } from '../os/showArchitecture.js';
 
 const FINISH_KEY = '.exit';
 const MOVING_UP_KEY = 'up';
@@ -29,6 +30,7 @@ const GET_EOL_KEY = 'os --EOL';
 const GET_CPUS_KEY = 'os --cpus';
 const GET_USERNAME_KEY = 'os --username';
 const GET_HOMEDIR_KEY = 'os --homedir';
+const GET_ARCHITECTURE_KEY = 'os --architecture';
 
 export const writeData = async () => {
   stdin.on('data', async (data) => {
@@ -66,6 +68,8 @@ export const writeData = async () => {
       showUsername();
     } else if (invalidData === GET_HOMEDIR_KEY) {
       showHomeDir();
+    } else if (invalidData === GET_ARCHITECTURE_KEY) {
+      showArchitecture();
     } else {
       console.log('Invalid input');
     }
