@@ -12,6 +12,7 @@ import { deleteFile } from '../deleteFile/deleteFile.js';
 import { moveFile } from '../moveFile/moveFile.js';
 import { showEOL } from '../os/showEOL.js';
 import { showCPUs } from '../os/showCPUS.js';
+import { showUsername } from '../os/showUsername.js';
 
 const FINISH_KEY = '.exit';
 const MOVING_UP_KEY = 'up';
@@ -25,6 +26,7 @@ const DELETE_FILE_KEY = 'rm ';
 const MOVE_FILE_KEY = 'mv ';
 const GET_EOL_KEY = 'os --EOL';
 const GET_CPUS_KEY = 'os --cpus';
+const GET_USERNAME_KEY = 'os --username';
 
 export const writeData = async () => {
   stdin.on('data', async (data) => {
@@ -58,6 +60,8 @@ export const writeData = async () => {
       showEOL();
     } else if (invalidData === GET_CPUS_KEY) {
       showCPUs();
+    } else if (invalidData === GET_USERNAME_KEY) {
+      showUsername();
     } else {
       console.log('Invalid input');
     }
