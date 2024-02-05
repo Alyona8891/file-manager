@@ -17,6 +17,7 @@ import { showHomeDir } from '../os/showHomedir.js';
 import { showArchitecture } from '../os/showArchitecture.js';
 import { calculateHash } from '../calculateHash/calculateHash.js';
 import { compressFile } from '../zip/compressFile.js';
+import { decompressFile } from '../zip/decompress.js';
 
 const FINISH_KEY = '.exit';
 const MOVING_UP_KEY = 'up';
@@ -35,6 +36,7 @@ const GET_HOMEDIR_KEY = 'os --homedir';
 const GET_ARCHITECTURE_KEY = 'os --architecture';
 const CALCULATE_HASH_KEY = 'hash ';
 const COMPRESS_FILE_KEY = 'compress ';
+const DECOMPRESS_FILE_KEY = 'decompress ';
 
 export const writeData = async () => {
   stdin.on('data', async (data) => {
@@ -82,6 +84,10 @@ export const writeData = async () => {
       invalidData.slice(0, COMPRESS_FILE_KEY.length) === COMPRESS_FILE_KEY
     ) {
       await compressFile(invalidData.slice(COMPRESS_FILE_KEY.length));
+    } else if (
+      invalidData.slice(0, DECOMPRESS_FILE_KEY.length) === DECOMPRESS_FILE_KEY
+    ) {
+      await decompressFile(invalidData.slice(DECOMPRESS_FILE_KEY.length));
     } else {
       console.log('Invalid input');
     }
