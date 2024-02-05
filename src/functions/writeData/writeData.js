@@ -18,6 +18,7 @@ import { showArchitecture } from '../os/showArchitecture.js';
 import { calculateHash } from '../calculateHash/calculateHash.js';
 import { compressFile } from '../zip/compressFile.js';
 import { decompressFile } from '../zip/decompress.js';
+import { ERROR_MESSAGE, INVALID_INPUT_MESSAGE } from '../../constants.js';
 
 const FINISH_KEY = '.exit';
 const MOVING_UP_KEY = 'up';
@@ -89,12 +90,12 @@ export const writeData = async () => {
     ) {
       await decompressFile(invalidData.slice(DECOMPRESS_FILE_KEY.length));
     } else {
-      console.log('Invalid input');
+      console.error(INVALID_INPUT_MESSAGE);
     }
   });
 
   stdin.on('error', () => {
-    console.error('Invalid input');
+    console.error(ERROR_MESSAGE);
   });
 
   process.on('SIGINT', () => {
