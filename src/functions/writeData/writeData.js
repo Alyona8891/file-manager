@@ -9,7 +9,8 @@ import { createFile } from '../createFile/createFile.js';
 import { renameFile } from '../renameFile/renameFile.js';
 import { copyFile } from '../copyFile/copyFile.js';
 import { deleteFile } from '../deleteFile/deleteFile.js';
-import { moveFile } from '../moveFile.js/moveFile.js';
+import { moveFile } from '../moveFile/moveFile.js';
+import { showEOL } from '../os/showEOL.js';
 
 const FINISH_KEY = '.exit';
 const MOVING_UP_KEY = 'up';
@@ -21,6 +22,7 @@ const RENAME_FILE_KEY = 'rn ';
 const COPY_FILE_KEY = 'cp ';
 const DELETE_FILE_KEY = 'rm ';
 const MOVE_FILE_KEY = 'mv ';
+const GET_EOL_KEY = 'os --EOL';
 
 export const writeData = async () => {
   stdin.on('data', async (data) => {
@@ -43,13 +45,15 @@ export const writeData = async () => {
     ) {
       await renameFile(invalidData.slice(RENAME_FILE_KEY.length));
     } else if (invalidData.slice(0, COPY_FILE_KEY.length) === COPY_FILE_KEY) {
-      await copyFile(invalidData.slice(COPY_FILE_KEY.length));
+      copyFile(invalidData.slice(COPY_FILE_KEY.length));
     } else if (
       invalidData.slice(0, DELETE_FILE_KEY.length) === DELETE_FILE_KEY
     ) {
       await deleteFile(invalidData.slice(DELETE_FILE_KEY.length));
     } else if (invalidData.slice(0, MOVE_FILE_KEY.length) === MOVE_FILE_KEY) {
       moveFile(invalidData.slice(MOVE_FILE_KEY.length));
+    } else if (invalidData === GET_EOL_KEY) {
+      showEOL();
     } else {
       console.log('Invalid input');
     }
