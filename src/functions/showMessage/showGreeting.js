@@ -1,7 +1,8 @@
 import { defineUsername } from './defineUsername.js';
 
-const GREETING_TEMPLATE = 'Welcome to the File Manager, ';
+const GREETING_TEMPLATE_PART1 = 'Welcome to the File Manager, ';
+const GREETING_TEMPLATE_PART2 = '!';
 
 export const showGreeting = () => {
-  console.log(GREETING_TEMPLATE + defineUsername() + '!');
+  console.log(GREETING_TEMPLATE + defineUsername() + GREETING_TEMPLATE_PART2);
 };
