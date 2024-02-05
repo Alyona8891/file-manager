@@ -13,6 +13,7 @@ import { moveFile } from '../moveFile/moveFile.js';
 import { showEOL } from '../os/showEOL.js';
 import { showCPUs } from '../os/showCPUS.js';
 import { showUsername } from '../os/showUsername.js';
+import { showHomeDir } from '../os/showHomedir.js';
 
 const FINISH_KEY = '.exit';
 const MOVING_UP_KEY = 'up';
@@ -27,6 +28,7 @@ const MOVE_FILE_KEY = 'mv ';
 const GET_EOL_KEY = 'os --EOL';
 const GET_CPUS_KEY = 'os --cpus';
 const GET_USERNAME_KEY = 'os --username';
+const GET_HOMEDIR_KEY = 'os --homedir';
 
 export const writeData = async () => {
   stdin.on('data', async (data) => {
@@ -62,6 +64,8 @@ export const writeData = async () => {
       showCPUs();
     } else if (invalidData === GET_USERNAME_KEY) {
       showUsername();
+    } else if (invalidData === GET_HOMEDIR_KEY) {
+      showHomeDir();
     } else {
       console.log('Invalid input');
     }
