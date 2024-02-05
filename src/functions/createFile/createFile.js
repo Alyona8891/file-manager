@@ -16,6 +16,7 @@ export const createFile = async (fileName) => {
         .catch(() => console.error(ERROR_MESSAGE));
     } else {
       console.error(ERROR_MESSAGE);
+      changeDir(userWorkingDir.path);
     }
   });
 };

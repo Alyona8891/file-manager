@@ -3,6 +3,9 @@ import path from 'node:path';
 import { getArgs } from '../getArgs/getArgs.js';
 import { ERROR_MESSAGE } from '../../constants.js';
 import { changeDir } from '../changeDirectory/changeDir.js';
+import { userWorkingDir } from '../../../index.js';
+import { showWorkingDir } from '../writeData/showWorkingDir.js';
+
 
 const fsPromises = fs.promises;
 
@@ -23,9 +26,11 @@ export const renameFile = async (data) => {
               .then(() => changeDir(newPathToFile))
               .catch(() => {
                 console.error(ERROR_MESSAGE);
+                showWorkingDir(userWorkingDir.path);
               });
           } else {
             console.error(ERROR_MESSAGE);
+            showWorkingDir(userWorkingDir.path);
           }
         });
       }
