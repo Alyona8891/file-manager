@@ -16,7 +16,10 @@ export const copyFile = async (data) => {
     const typeOfOldPath = await getTypeOfPath(oldPathToFile);
     const typeOfNewPath = await getTypeOfPath(oldPathToFile);
 
-    if (typeOfOldPath === TYPE_OF_PATH.file && typeOfNewPath === TYPE_OF_PATH.file) {
+    if (
+      typeOfOldPath === TYPE_OF_PATH.file &&
+      typeOfNewPath === TYPE_OF_PATH.file
+    ) {
       const readStream = fs.createReadStream(oldPathToFile, 'utf-8');
       readStream.on('error', () => console.error(ERROR_MESSAGE));
       const writableStream = fs.createWriteStream(newPathToFile);
