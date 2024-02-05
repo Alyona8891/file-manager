@@ -11,5 +11,6 @@ export const showEOL = () => {
     changeDir(userWorkingDir.path);
   } catch (error) {
     console.error(ERROR_MESSAGE);
+    changeDir(userWorkingDir.path);
   }
 };

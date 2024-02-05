@@ -12,5 +12,6 @@ export const showHomeDir = () => {
     changeDir(userWorkingDir.path);
   } catch (error) {
     console.error(ERROR_MESSAGE);
+    changeDir(userWorkingDir.path);
   }
 };
