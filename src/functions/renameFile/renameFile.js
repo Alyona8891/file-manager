@@ -36,6 +36,6 @@ export const renameFile = async (data) => {
       }
     });
   } catch (error) {
-    console.error(error);
+    console.error(ERROR_MESSAGE);
   }
 };

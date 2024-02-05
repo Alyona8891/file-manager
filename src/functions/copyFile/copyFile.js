@@ -30,7 +30,7 @@ export const copyFile = async (data) => {
       changeDir(userWorkingDir.path);
     }
   } catch (error) {
-    console.error(error);
+    console.error(ERROR_MESSAGE);
     changeDir(userWorkingDir.path);
   }
 };
